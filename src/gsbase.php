@@ -1,5 +1,7 @@
 <?php
 
+namespace sattya\gsbase;
+
 /**
  * GsBase class file.
  *
