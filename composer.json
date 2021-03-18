@@ -1,0 +1,28 @@
+{
+    // nombre del paquete
+    "name": "sattya/yii2-gsbase",
+
+    // tipo de paquete
+    "type": "yii2-extension",
+
+    "description": "Conector de GsBase con Yii2",
+    "keywords": ["yii2", "gsbase"],
+    "authors": [
+        {
+            "name": "Alfonso Labrador",
+            "email": "alabrador@itsyx.com"
+        }
+    ],
+
+    // dependencias del paquete
+    "require": {
+        "yiisoft/yii2": "~2.0.0",
+    },
+
+    // especificaciones de la autocarga de clases
+    "autoload": {
+        "psr-4": {
+            "GsBase": "src/"
+        }
+    }
+}
