@@ -70,7 +70,7 @@ class gsbase
      * @param string $ventana Ventana en la que ejecutar la accion en GsBase (opcional)
      * @param string $salida 
      */
-    public function gsbase_exec($comando,$argumentos,$ventana='',$salida=''){
+    public function gsbase_exec($comando,$argumentos,$ventana='',&$salida=''){
             global $__gsBase;
 
             ini_set('memory_limit', '-1');
