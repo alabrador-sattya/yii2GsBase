@@ -7,7 +7,7 @@
  * @copyright Copyright &copy; 2015 Sevilla
  *
  */
-class Gsbase
+class gsbase
 {
     const GSBASE_MAX_LENGTH = 1024;
     const GSBASE_MAX_ITERACIONES= 10000;
