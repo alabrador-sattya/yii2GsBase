@@ -6,7 +6,7 @@ namespace sattya\GsBase;
  * GsBase class file.
  *
  * @author Alfonso Labrador (alabrador@itsyx.com)
- * @copyright Copyright &copy; 2015 Sevilla
+ * @copyright Copyright 2015 Sevilla
  *
  */
 class gsbase
@@ -21,28 +21,37 @@ class gsbase
 
     public $__gsBase=null;
 
+    /**
+     * Inicia la conexión con GsBase.
+     *
+     * @param string $servidor ip del servidor GsBase
+     * @param string $puerto puerto del servidor GsBase
+     */
     public function gsbase_start($servidor,$puerto){
-            global $__gsBase;
-            $__gsBase=fsockopen($servidor,$puerto,$errno,$errstr);
-            if(!$__gsBase){
-                    self::gsbase_error($errstr);
-            }else{
-                stream_set_timeout($__gsBase, self::GSBASE_TIMEOUT);
-            }
+        global $__gsBase;
+        $__gsBase=fsockopen($servidor,$puerto,$errno,$errstr);
+        if(!$__gsBase){
+                self::gsbase_error($errstr);
+        }else{
+            stream_set_timeout($__gsBase, self::GSBASE_TIMEOUT);
+        }
     }
 
+    /**
+     * Conecta con GsBase. (Antes hay que realizar gsbase_start)
+    */
     public function gsbase_conecta(){
-            global $__gsBase;
-            if(!$__gsBase) return(false);
+        global $__gsBase;
+        if(!$__gsBase) return(false);
 
-            $msg='';
-            $login_end='';
-			$login_end=chr(self::GSBASE_LOGIN_END_1).chr(self::GSBASE_LOGIN_END_2);
+        $msg='';
+        $login_end='';
+        $login_end=chr(self::GSBASE_LOGIN_END_1).chr(self::GSBASE_LOGIN_END_2);
 
-            while(!($login_end == substr($msg,-2))){
-                    $msg .= fgets($__gsBase,2);
-            }
-            return(true);	
+        while(!($login_end == substr($msg,-2))){
+                $msg .= fgets($__gsBase,2);
+        }
+        return(true);
     }
 
     protected function gsbase_error($msg,$nerr=500){
@@ -51,7 +60,17 @@ class gsbase
             throw new \yii\web\HttpException($nerr, 'Error GsBase: ' . $msg);
     }
 
-    public function gsbase_exec($comando,$argumentos,$ventana='',&$salida=''){
+    /**
+     * Ejecuta accion en GsBase.
+     *
+     * @return mixed Respuesta de la accion en el servidor GsBase
+     *
+     * @param string $comando Acción a ejecutar
+     * @param array $argumentos Array asociativo de tipo argumento=>valor a pasar a la acción
+     * @param string $ventana Ventana en la que ejecutar la accion en GsBase (opcional)
+     * @param string $salida 
+     */
+    public function gsbase_exec($comando,$argumentos,$ventana='',$salida=''){
             global $__gsBase;
 
             ini_set('memory_limit', '-1');
