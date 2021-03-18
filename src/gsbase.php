@@ -68,7 +68,7 @@ class gsbase
      * @param string $comando Acción a ejecutar
      * @param array $argumentos Array asociativo de tipo argumento=>valor a pasar a la acción
      * @param string $ventana Ventana en la que ejecutar la accion en GsBase (opcional)
-     * @param string $salida 
+     * @param string $salida
      */
     public function gsbase_exec($comando,$argumentos,$ventana='',&$salida=''){
             global $__gsBase;
@@ -129,6 +129,19 @@ class gsbase
             }
     }
 
+    /**
+     * Ejecuta Login en GsBase.
+     *
+     * @return boolean Indica si el login se ha realizado correctamente
+     *
+     * @param string $empresa Empresa en GsBase
+     * @param array $usuario Usuario de GsBase
+     * @param string $clave Contraseña de GsBase
+     * @param string $aplicacion Aplicación de GsBase
+     * @param string $ejercicio Ejercicio de GsBase
+     * @param string $clave_aplicacion Clave de Aplicación (Opcional)
+     * @param string $clave_ejercicio Clave de Ejercicio (Opcional)
+     */
     public function gsbase_login($empresa,$usuario,$clave,$aplicacion,$ejercicio='',$clave_aplicacion='',$clave_ejercicio=''){
             if(!self::gsbase_exec(self::GSBASE_LOGIN_CMD,"$empresa,$usuario,$clave,$aplicacion,$ejercicio,$clave_aplicacion,$clave_ejercicio",'',$out)){
                     self::gsbase_error('p_login');
@@ -151,6 +164,9 @@ class gsbase
             return($login_ok);
     }
 
+    /*
+     * Finaliza la conexión con el servidor GsBase
+     */
     public function gsbase_stop(){
             global $__gsBase;
             fclose($__gsBase);
