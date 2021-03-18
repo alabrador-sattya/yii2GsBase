@@ -1,38 +1,8 @@
-{
-<<<<<<< HEAD
-	"name": "sattya/yii2-gsbase",
-=======
-    // nombre del paquete
-    "name": "sattya/yii2-gsbase",
-
-    // tipo de paquete
->>>>>>> 94dae06e98b6e5d060d412cf1e8f27fb95133bf6
-    "type": "yii2-extension",
-
-    "description": "Conector de GsBase con Yii2",
-    "keywords": ["yii2", "gsbase"],
-    "authors": [
-        {
-            "name": "Alfonso Labrador",
-            "email": "alabrador@itsyx.com"
-        }
-    ],
-
-<<<<<<< HEAD
-=======
-    // dependencias del paquete
->>>>>>> 94dae06e98b6e5d060d412cf1e8f27fb95133bf6
-    "require": {
-        "yiisoft/yii2": "~2.0.0",
-    },
-
-<<<<<<< HEAD
-=======
-    // especificaciones de la autocarga de clases
->>>>>>> 94dae06e98b6e5d060d412cf1e8f27fb95133bf6
-    "autoload": {
-        "psr-4": {
-            "GsBase": "src/"
-        }
-    }
+{"name": "sattya/yii2-gsbase",
+ "type": "yii2-extension",
+ "description": "Conector de GsBase con Yii2",
+ "keywords": ["yii2", "gsbase"],
+ "authors": [{"name": "Alfonso Labrador","email": "alabrador@itsyx.com"}],
+ "require": {"yiisoft/yii2": "~2.0.0"},
+ "autoload": {"psr-0":{"GsBase": "src/"}}
 }

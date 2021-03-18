@@ -7,14 +7,14 @@ $__FECHA_ACTUAL=date('Ymd');
 */
 
 //gsBase
-$_GSBASE_HOST='195.81.204.144';
+$_GSBASE_HOST='x.x.x.x';
 $_GSBASE_PORT='8122';
 $_GSBASE_USER='__*www';
-$_GSBASE_PASS='axc#76hyVvmxz12';
+$_GSBASE_PASS='pass';
 //$_GSBASE_PASS='p1';
-$_GSBASE_CORP='queralto';
-$_GSBASE_APL='gsgesi_gq';
-$_GSBASE_EX='jqa';
+$_GSBASE_CORP='empresa';
+$_GSBASE_APL='aplicacion';
+$_GSBASE_EX='ejercicio';
 $_GSBASE_EX_PASS='';
 $_GSBASE_APL_PASS='';
 
