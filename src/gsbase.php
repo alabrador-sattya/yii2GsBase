@@ -2,6 +2,8 @@
 
 namespace sattya\GsBase;
 
+use Yii;
+
 /**
  * GsBase class file.
  *
@@ -172,7 +174,9 @@ class gsbase
             fclose($__gsBase);
     }
 
-    //Funcion para devolver la respuesta formateada
+    /**
+      * Funcion para devolver la respuesta formateada
+     */
     public function respuesta($res) {
 
             echo('<br>'); 
@@ -190,5 +194,51 @@ class gsbase
             }
             echo('<br>');
     }
+
+    /**
+     * Función para realizar petición GsBase (Unificada)
+     *
+     * @return mixed Respuesta de la accion GsBase
+     *
+     * @param string $accion nombre de la accion en GsBase
+     * @param array $param Array clave=>valor con los parámetros a pasar a la accion
+     * @param string $pagina nombre de la pagina en GsBase donde están especificadas las acciones
+     */
+    public function gsbase_accion($accion,$param,$pagina)
+    {
+        //Recuperamos parámetros
+        $gsb_host = Yii::$app->params['gsb_host'];
+        $gsb_port = Yii::$app->params['gsb_port'];
+        $gsb_user = Yii::$app->params['gsb_user'];
+        $gsb_pass = Yii::$app->params['gsb_pass'];
+        $gsb_corp = Yii::$app->params['gsb_corp'];
+        $gsb_apl = Yii::$app->params['gsb_apl'];
+        $gsb_ex = Yii::$app->params['gsb_ex'];
+
+        //Conectamos a GsBase y ejecutamos accion
+        self::gsbase_start($gsb_host, $gsb_port);
+        if(self::gsbase_conecta()){
+            if(self::gsbase_login($gsb_corp, $gsb_user, $gsb_pass, $gsb_apl, $gsb_ex)){
+                //Realizamos petición de datos a GsBase
+                $res = unserialize(self::gsbase_exec($accion,serialize($param),$pagina));
+
+                //Cerramos la conexion
+                self::gsbase_stop();
+                //Comprobamos que no hay errores definidos por la accion
+                if ($res[0]==='Ok'){
+                    return $res[1];
+                }else{
+                    throw new \yii\web\BadRequestHttpException("Error en  GsBase. " . $res[1]);
+                }
+            }else{
+                self::gsbase_stop();
+                throw new \yii\web\BadRequestHttpException("Error en Login a GsBase. Reintente pasados unos minutos");
+            }
+        }else{
+            self::gsbase_stop();
+            throw new \yii\web\BadRequestHttpException("Error al conectar con GsBase. Reintente pasados unos minutos");
+        }
+    }
 }
 ?>
+
